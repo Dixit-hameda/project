@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section compact">
+  <div class="container narrow text-center">
+    <div class="form-card">
+      <h1>Worker QR Code</h1>
+      <p>Scan this code to open the worker verification page.</p>
+      <img class="qr-img" src="{{ url_for('qr_generate', badge=badge) }}" alt="Worker QR code">
+      <a class="btn btn-success mt-4" href="{{ url_for('qr_scan', badge=badge) }}"><i class="bi bi-qr-code-scan me-2"></i>Open Scan Page</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

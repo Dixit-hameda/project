@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-end mb-4">
+      <div>
+        <span class="eyebrow green">Admin</span>
+        <h1>Compliance Dashboard</h1>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-success" href="{{ url_for('hazard_report') }}"><i class="bi bi-exclamation-triangle me-2"></i>Report Hazard</a>
+        <a class="btn btn-outline-success" href="{{ url_for('report_pdf') }}"><i class="bi bi-file-earmark-pdf me-2"></i>Download PDF</a>
+      </div>
+    </div>
+    <div class="row g-4">
+      {% for icon, label, value in [
+        ('bi-people','Workers',stats.workers),
+        ('bi-clipboard-check','Checklists',stats.checklists),
+        ('bi-exclamation-octagon','Hazards',stats.hazards),
+        ('bi-broadcast','Open Hazards',stats.open_hazards)
+      ] %}
+      <div class="col-sm-6 col-lg-3"><div class="stat-card"><i class="bi {{ icon }}"></i><span>{{ label }}</span><strong>{{ value }}</strong></div></div>
+      {% endfor %}
+    </div>
+    <div class="row g-4 mt-1">
+      <div class="col-lg-7"><div class="data-card"><h4>Safety Trend</h4><canvas id="dashboardChart"></canvas></div></div>
+      <div class="col-lg-5"><div class="data-card"><h4>Recent Hazards</h4>
+        <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Zone</th><th>Severity</th><th>Status</th></tr></thead><tbody>
+        {% for hazard in hazards %}<tr><td>{{ hazard.zone }}</td><td><span class="badge text-bg-success">{{ hazard.severity }}</span></td><td>{{ hazard.status }}</td></tr>{% else %}<tr><td colspan="3">No hazards reported yet.</td></tr>{% endfor %}
+        </tbody></table></div></div></div>
+    </div>
+    <div class="data-card mt-4"><h4>Recent Checklists</h4>
+      <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Worker</th><th>Zone</th><th>Submitted</th><th>Notes</th></tr></thead><tbody>
+      {% for item in checklists %}<tr><td>{{ item.worker_name }}</td><td>{{ item.zone }}</td><td>{{ item.created_at }}</td><td>{{ item.notes or '-' }}</td></tr>{% else %}<tr><td colspan="4">No checklists submitted yet.</td></tr>{% endfor %}
+      </tbody></table></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+window.dashboardData = {{ [stats.checklists, stats.hazards, stats.open_hazards, stats.workers] | tojson }};
+</script>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section">
+  <div class="container narrow">
+    <div class="form-card">
+      <h1>Hazard Reporting</h1>
+      <form method="post" enctype="multipart/form-data">
+        <div class="row g-3">
+          <div class="col-md-6"><label class="form-label">Reporter</label><input class="form-control" name="reporter" required></div>
+          <div class="col-md-6"><label class="form-label">Zone</label><input class="form-control" name="zone" required></div>
+        </div>
+        <label class="form-label mt-3">Severity</label>
+        <select class="form-select" name="severity"><option>Low</option><option>Medium</option><option>High</option><option>Critical</option></select>
+        <label class="form-label mt-3">Description</label>
+        <textarea class="form-control" name="description" rows="4" required></textarea>
+        <label class="form-label mt-3">Upload Image</label>
+        <input class="form-control" type="file" name="image" accept="image/*">
+        <button class="btn btn-success btn-lg w-100 mt-4">Submit Hazard</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow green">About</span>
+      <h1>Built for electrical teams that need fast, visible compliance.</h1>
+      <p>VoltSafe brings daily worker checks, hazard evidence, QR verification, reports, and analytics into a clean operational dashboard.</p>
+    </div>
+    <div class="row g-4">
+      {% for icon, title, text in [
+        ('bi-qr-code-scan','QR Verification','Generate and scan worker QR links for quick site access.'),
+        ('bi-clipboard2-check','Daily Checklists','Capture PPE, lockout, tool, and panel safety status.'),
+        ('bi-camera','Hazard Evidence','Upload images and classify hazards by severity and zone.'),
+        ('bi-file-earmark-pdf','PDF Reporting','Download a clean compliance summary for supervisors.')
+      ] %}
+      <div class="col-md-6 col-lg-3">
+        <div class="feature-card h-100">
+          <i class="bi {{ icon }}"></i>
+          <h5>{{ title }}</h5>
+          <p>{{ text }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

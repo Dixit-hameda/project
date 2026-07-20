@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow green">Analytics</span>
+      <h1>Safety performance insights</h1>
+      <p>Review checklist activity and hazard severity distribution across active electrical zones.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-lg-6"><div class="data-card"><h4>Hazards by Severity</h4><canvas id="severityChart"></canvas></div></div>
+      <div class="col-lg-6"><div class="data-card"><h4>Checklists by Zone</h4><canvas id="zoneChart"></canvas></div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+window.severityLabels = {{ severities | map(attribute='severity') | list | tojson }};
+window.severityValues = {{ severities | map(attribute='total') | list | tojson }};
+window.zoneLabels = {{ zones | map(attribute='zone') | list | tojson }};
+window.zoneValues = {{ zones | map(attribute='total') | list | tojson }};
+</script>
+{% endblock %}

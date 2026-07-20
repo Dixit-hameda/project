@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section compact">
+  <div class="container narrow">
+    <div class="form-card text-center">
+      <i class="bi bi-check2-circle scan-icon"></i>
+      <h1>QR Scan Verified</h1>
+      <p>Badge {{ badge or 'Unknown' }} is ready for daily safety entry.</p>
+      <a class="btn btn-success btn-lg" href="{{ url_for('worker_login') }}">Continue</a>
+    </div>
+  </div>
+</section>
+{% endblock %}

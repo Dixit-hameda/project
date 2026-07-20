@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="page-section compact">
+  <div class="container narrow">
+    <div class="form-card">
+      <h1><i class="bi bi-lock me-2"></i>Admin Login</h1>
+      <p>Demo credentials: admin / admin123</p>
+      <form method="post">
+        <label class="form-label">Username</label>
+        <input class="form-control" name="username" required>
+        <label class="form-label mt-3">Password</label>
+        <input class="form-control" type="password" name="password" required>
+        <button class="btn btn-success btn-lg w-100 mt-4">Open Dashboard</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
